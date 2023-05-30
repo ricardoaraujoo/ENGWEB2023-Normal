@@ -1,0 +1,28 @@
+Para a persistencia de dados usei a DB mongoDB. Antes de import o meu ficheiro JSON para a db fiz umas alterações:
+    - Alterei o campo Id para _id, pois no mongoDB é assim que o field id tem que se chamar
+    - Alteirei o nome dos campos com espaços, por exemplo, Número de Registo para Número_de_Registo. Para depois ao fazer a schema da planta poder usar estes nomes como fields.
+
+Após estas alterações, fiz import do json para a db com o seguinte comando:
+    mongoimport -d plantas -c plantas --file plantas.json --jsonArray
+onde não tive nenhum erro de importação.
+
+Respostas Textuais Pedidas: 
+Query 1: db.plantas.count()
+Query 2: db.plantas.find({Freguesia:"São Domingos de Rana"}).count()
+Query 3: db.plantas.distinct("Freguesia").sort()
+Query 4: db.plantas.aggregate([ { $group: { _id: "$Freguesia", count: { $sum: 1 } } }])
+Query 5: db.plantas.aggregate([ { $group: { _id: "$Espécie", count: { $sum: 1 } } }])
+
+Instruções de como executar as aplicações:
+    na diretoria do ex1:
+        escrever na linha de comandos:  "npm i http-errors"
+                                        "npm i mongoose"
+                                        "npm start"
+    na diretoria do ex2:
+        escrever na linha de comandos:  "npm i http-errors"
+                                        "npm i axios"
+                                        "npm start"
+    (Deveria ter instalado na minha maquina com a flag --save mas esqueci-me, pois assim, so tinham que fazer "npm i" e "npm start")
+
+    Deseguida abrir uma pagina web com o seguinte link: "http://localhost:15031/" para testar a interface. 
+    Para testar as demasiadas queries da API de dados, tem que usar uma ferramenta auxiliar, por exemplo, o POSTMAN.
